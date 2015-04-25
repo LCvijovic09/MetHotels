@@ -1,0 +1,23 @@
+<html t:type="layout" title="TapestryHibernateDemo Index"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+    
+    <t:beaneditform object="grad" exclude="iDGrad" add="iDDrzava" >
+        <p:iDDrzava>
+            <t:label for="iDDrzava"/>:
+            <t:select t:blankLabel="Odaberi drzavu" t:id="iDDrzava" encoder="encoder" model="drzave" validate="required"/>
+        </p:iDDrzava>
+    </t:beaneditform>
+    
+    <t:grid source="gradovi" exclude="iDGrad" add="delete,drzava" row="onegrad"
+           reorder="naziv,drzava,delete">
+        <p:deleteCell>
+            <t:actionlink t:id="delete" context="onegrad.iDGrad">Delete</t:actionlink>
+        </p:deleteCell>
+        <p:drzavaCell>
+            ${drzava}
+        </p:drzavaCell>
+    </t:grid>
+           
+</html>

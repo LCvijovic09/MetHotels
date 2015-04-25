@@ -1,5 +1,7 @@
 package com.mycompany.methotels.services;
 
+import com.mycompany.methotels.dao.GradDrzavaDao;
+import com.mycompany.methotels.dao.GradDrzavaDaoImpl;
 import java.io.IOException;
 
 import org.apache.tapestry5.*;
@@ -24,6 +26,7 @@ public class AppModule
 {
     public static void bind(ServiceBinder binder)
     {
+        binder.bind(GradDrzavaDao.class,GradDrzavaDaoImpl.class);
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.

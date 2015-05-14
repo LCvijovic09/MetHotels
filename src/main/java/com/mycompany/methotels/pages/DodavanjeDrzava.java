@@ -5,6 +5,8 @@
  */
 package com.mycompany.methotels.pages;
 
+import com.mycompany.methotels.components.GenericEditor;
+import com.mycompany.methotels.dao.GenericDaoImpl;
 import com.mycompany.methotels.dao.GradDrzavaDao;
 import com.mycompany.methotels.entities.Drzava;
 import java.util.ArrayList;
@@ -17,8 +19,8 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  *
  * @author Lazar
  */
-public class DodavanjeDrzava {
-
+public class DodavanjeDrzava extends GenericEditor<Drzava>{
+/*
     @Property
     private Drzava drzava;
     @Property
@@ -48,5 +50,5 @@ public class DodavanjeDrzava {
         gdDao.obrisiDrzavu(id);
         return this;
     }
-
+*/
 }

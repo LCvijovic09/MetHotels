@@ -27,13 +27,9 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 @Table(name = "drzava")
 @NamedQueries({
     @NamedQuery(name = "Drzava.findAll", query = "SELECT d FROM Drzava d")})
-public class Drzava implements Serializable {
+public class Drzava extends AbstractEntity{
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_Drzava")
-    private Integer iDDrzava;
     @Column(name = "Naziv")
     private String naziv;
     @Column(name = "NazivHotela")

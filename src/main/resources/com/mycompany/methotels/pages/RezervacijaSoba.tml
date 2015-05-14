@@ -1,0 +1,13 @@
+<html t:type="layout" title="TapestryHibernateDemo Index"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+    
+    <t:grid source="sobe" exclude="iDSoba" add="Rezervisano" row="onesoba"
+         reorder="imeSobe,sprat,internet,tv,djakuzi,Rezervisano">
+        
+        <p:rezervisanoCell>
+           <t:actionlink t:id="delete" context="onegrad.id">Delete</t:actionlink>
+        </p:rezervisanoCell>
+    </t:grid>
+</html>

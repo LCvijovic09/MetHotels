@@ -1,0 +1,12 @@
+<html t:type="layout" title="TapestryHibernateDemo Index"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+    
+    <t:grid source="rezervacije"  add="Rezervisano" row="onerez">
+        
+        <p:rezervisanoCell>
+           <t:actionlink t:id="delete" context="onerez">Delete</t:actionlink>
+        </p:rezervisanoCell>
+    </t:grid>
+</html>

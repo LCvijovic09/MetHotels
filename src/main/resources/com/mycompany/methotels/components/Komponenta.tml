@@ -1,0 +1,7 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd">
+<t:content>
+ <div style="border: 10px solid; size: 25px; border-radius: 15px;">
+ <strong><em>${komponenta}</em></strong>
+ </div>
+</t:content>
+</html>

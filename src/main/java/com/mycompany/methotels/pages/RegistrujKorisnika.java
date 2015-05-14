@@ -1,42 +1,42 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.mycompany.methotels.pages;
 
 import com.mycompany.methotels.dao.KorisnikDao;
+import com.mycompany.methotels.data.Role;
 import com.mycompany.methotels.entities.Korisnik;
-import org.apache.tapestry5.alerts.AlertManager;
+import com.mycompany.methotels.services.ProtectedPage;
+import javax.annotation.security.RolesAllowed;
 import org.apache.tapestry5.annotations.Component;
-import org.apache.tapestry5.annotations.InjectComponent;
-import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.corelib.components.BeanEditForm;
-import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.corelib.components.PasswordField;
-import org.apache.tapestry5.corelib.components.TextField;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.slf4j.Logger;
 
-public class Login {
+/**
+ *
+ * @author Lazar
+ */
+@ProtectedPage
+@RolesAllowed(value={"Admin"})
+public class RegistrujKorisnika {
 
+    @Property
+    private Korisnik korisnikReg;
     @Inject
     private KorisnikDao kDao;
-    @Property
-    private Korisnik korisnikLogin;
     @SessionState
     private Korisnik logovanKorisnik;
     @Component
     private BeanEditForm form;
 
-    Object onActivate() {
-        if (logovanKorisnik.getMejl() != null) {
-            return Index.class;
-        }
-        return null;
-    }
-
     public String getMD5Hash(String yourString) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-
             byte[] array = md.digest(yourString.getBytes());
             StringBuffer sb = new StringBuffer();
             for (int i = 0; i < array.length; ++i) {
@@ -48,15 +48,20 @@ public class Login {
         }
     }
     
+    
+    @CommitAfter
     Object onSuccess(){
-        String sifra=getMD5Hash(korisnikLogin.getLozinka());
-        Korisnik kor=kDao.provjeriKorisnika(korisnikLogin.getMejl(), sifra);
-        if(kor!=null){
-            logovanKorisnik=kor;
-            return Index.class;
+        if(!kDao.provjeriMejl(korisnikReg.getMejl())){
+        String unhashPass=korisnikReg.getLozinka();
+        korisnikReg.setLozinka(getMD5Hash(unhashPass));
+        korisnikReg.setRola(Role.Korisnik);
+        Korisnik kor=kDao.registrujKorisnika(korisnikReg);
+      //  logovanKorisnik=kor;
+        return this;
         }else{
-            form.recordError("UNijeli ste pogresne parametre");
-            return null;
+            form.recordError("Unijeti E-Mail vec postoji");
+            return null;    
         }
     }
+
 }
